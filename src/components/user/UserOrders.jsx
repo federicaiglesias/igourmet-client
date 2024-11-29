@@ -28,7 +28,7 @@ function UserOrders() {
   const userOrders = orders.filter((order) => order.userId === user.userId);
   return (
     <>
-      <div className="profile-bg min-vh-100">
+      <div className="profile-bg p-4 min-vh-100">
         <div className="mt-5 pt-4 container">
           <div className="mb-2 text-center">
             <h1 className="orders-title">Mis órdenes</h1>
