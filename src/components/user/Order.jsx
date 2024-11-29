@@ -50,7 +50,7 @@ function Order({ order }) {
             </div>
 
             <div className="d-flex flex-wrap justify-content-center justify-content-md-start">
-              <div className="mb-3 me-md-4 text-center text-md-start">
+              <div className="mb-3 me-md-4 text-md-start">
                 <h6 className="mb-1 fs-5 fw-bold text-color">Precio total</h6>
                 <p className="mb-0 fs-5 text-color-units">
                   $
@@ -60,14 +60,14 @@ function Order({ order }) {
                   ) + 200}
                 </p>
               </div>
-              <div className="mb-3 ms-md-3 text-center text-md-start">
+              <div className="mb-3 ms-md-3 text-md-start">
                 <h6 className="mb-1 fs-5 fw-bold text-color">Estado</h6>
                 <p className="mb-0 fs-5 text-color-units">{order.status}</p>
               </div>
             </div>
           </div>
 
-          <div className="col-12 col-md-3 text-center text-md-end">
+          <div className="col-12 col-md-3 text-md-end">
             <Link to="">
               <button
                 className="rounded px-4 w-100 mb-2"
