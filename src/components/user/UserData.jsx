@@ -80,7 +80,7 @@ function UserData() {
   };
 
   return (
-    <div className="profile-bg mt-4 p-4 vh-100">
+    <div className="profile-bg mt-4 p-4 min-vh-100">
       <div className="container mb-4 mt-3 rounded">
         <div className="text-center">
           <h1 className="mb-2 orders-title">Perfil del usuario</h1>
@@ -235,7 +235,7 @@ function UserData() {
             </div>
           </form>
         </div>
-        <div>
+        <div className="mb-3">
           <button
             className="rounded data-card btn text-color border"
             onClick={handleSweetAlert}

@@ -46,7 +46,7 @@ function UserProfile() {
   };
 
   return (
-    <div className="profile-bg mt-4 p-4 vh-100">
+    <div className="profile-bg mt-4 p-4 min-vh-100">
       <div className="container mb-4 mt-3 rounded">
         <div className="text-center">
           <h1 className="mb-2 orders-title">¡Hola, {userInfo.firstname}!</h1>
@@ -149,7 +149,7 @@ function UserProfile() {
             </Link>
           </div>
         </div>
-        <div>
+        <div className="mb-3">
           <button
             className="data-card rounded btn border"
             onClick={handleLogout}

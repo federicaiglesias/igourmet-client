@@ -52,7 +52,7 @@ function UserOrders() {
               </div>
             )}
           </div>
-          <div>
+          <div className="mb-3">
             <button className="data-card rounded btn border">
               <Link to="/usuario" className="btn p-0 text-color-units">
                 <i className="bi bi-arrow-left"></i>
