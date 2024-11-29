@@ -235,7 +235,7 @@ function UserData() {
             </div>
           </form>
         </div>
-        <div className="mb-3">
+        <div className="mb-2">
           <button
             className="rounded data-card btn text-color border"
             onClick={handleSweetAlert}
