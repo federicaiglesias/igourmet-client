@@ -149,10 +149,14 @@ function UserProfile() {
             </Link>
           </div>
         </div>
-
-        <h6 className="data-card rounded btn border" onClick={handleLogout}>
-          <i className="bi bi-box-arrow-left text-color"></i>
-        </h6>
+        <div>
+          <button
+            className="data-card rounded btn border"
+            onClick={handleLogout}
+          >
+            <i className="bi bi-box-arrow-left text-color"></i>
+          </button>
+        </div>
       </div>
     </div>
   );

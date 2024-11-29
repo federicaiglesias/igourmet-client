@@ -26,7 +26,6 @@ function UserOrders() {
   }, []);
 
   const userOrders = orders.filter((order) => order.userId === user.userId);
-/*hola*/
   return (
     <>
       <div className="profile-bg min-vh-100">
@@ -53,11 +52,13 @@ function UserOrders() {
               </div>
             )}
           </div>
-          <h6 className="data-card rounded btn border">
-            <Link to="/usuario" className="btn p-0 text-color-units">
-              <i className="bi bi-arrow-left"></i>
-            </Link>
-          </h6>
+          <div>
+            <button className="data-card rounded btn border">
+              <Link to="/usuario" className="btn p-0 text-color-units">
+                <i className="bi bi-arrow-left"></i>
+              </Link>
+            </button>
+          </div>
         </div>
       </div>
     </>

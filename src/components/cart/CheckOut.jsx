@@ -213,7 +213,7 @@ function CheckOut() {
                 </div>
                 <div className="col-md-6">
                   <RegionDropdown
-                  required
+                    required
                     country={shippingInfo.country}
                     value={shippingInfo.region}
                     defaultOptionLabel="Seleccionar región"
@@ -295,7 +295,7 @@ function CheckOut() {
                 type="submit"
                 className="checkout-btn rounded px-3 w-100 py-2"
               >
-                Comprar
+                Finalizar la compra
               </button>
             </div>
           </form>
