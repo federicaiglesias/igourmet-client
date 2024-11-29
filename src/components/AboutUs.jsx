@@ -385,7 +385,7 @@ function AboutUs() {
                 />
               </div>
 
-              <div className="col-12 col-md-6 ps-5">
+              <div className="col-12 col-md-6 ps-md-5">
                 <p className="display-6 fw-bold">Logo</p>
                 <img
                   src="/logo-igourmet.png"
