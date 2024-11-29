@@ -50,8 +50,8 @@ function Order({ order }) {
             </div>
 
             <div className="d-flex flex-wrap justify-content-center justify-content-md-start">
-              <div className="mb-3 me-md-4 text-md-start">
-                <h6 className="mb-1 fs-5 fw-bold text-color">Precio total</h6>
+              <div className="mb-3 me-4 text-md-start">
+                <h6 className="mb-1 fs-5 fw-bold text-color">Precio total:</h6>
                 <p className="mb-0 fs-5 text-color-units">
                   $
                   {order.items?.reduce(
@@ -61,7 +61,7 @@ function Order({ order }) {
                 </p>
               </div>
               <div className="mb-3 ms-md-3 text-md-start">
-                <h6 className="mb-1 fs-5 fw-bold text-color">Estado</h6>
+                <h6 className="mb-1 fs-5 fw-bold text-color">Estado:</h6>
                 <p className="mb-0 fs-5 text-color-units">{order.status}</p>
               </div>
             </div>
