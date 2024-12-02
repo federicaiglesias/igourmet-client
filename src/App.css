@@ -158,7 +158,7 @@ button:hover {
 
 .curva-light::after {
   content: "";
-  background-image: url(/public/curveLight.svg);
+  background-image: url(/curveLight.svg);
   background-repeat: no-repeat;
   background-size: cover;
   position: absolute;
@@ -174,7 +174,7 @@ button:hover {
 
 .curva-dark::after {
   content: "";
-  background-image: url(/public/curveDark.svg);
+  background-image: url(/curveDark.svg);
   background-repeat: no-repeat;
   background-size: cover;
   position: absolute;
@@ -255,7 +255,7 @@ button:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("../../../public/imgsignup.avif");
+  background-image: url("/imgsignup.avif");
   background-size: cover;
   background-repeat: no-repeat;
   filter: brightness(0.5);

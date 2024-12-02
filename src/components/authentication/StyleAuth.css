@@ -43,14 +43,14 @@ button:hover {
   background-color: #d65a31;
 }
 .login-image {
-  background-image: url("../../../public/imglogin.avif");
+  background-image: url("/imglogin.avif");
   background-size: cover; /* Hace que la imagen se ajuste dentro del contenedor sin recortarse */
   background-repeat: no-repeat; /* Evita que la imagen se repita */
   display: flex;
   align-items: flex-start;
 }
 .signup-image {
-  background-image: url("../../../public/imgsignup.avif");
+  background-image: url("/imgsignup.avif");
   background-size: cover; /* Hace que la imagen se ajuste dentro del contenedor sin recortarse */
   background-repeat: no-repeat; /* Evita que la imagen se repita */
   display: flex;
