@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
 
-function AboutUs() {
+function AboutUsEnglish() {
   useEffect(() => {
     window.scrollTo(0, 0);
   });
@@ -11,57 +11,55 @@ function AboutUs() {
     <div>
       <div className="container-fluid background-image d-flex align-items-center justify-content-center position-relative">
         <div className="position-absolute top-0 end-0 me-3 mt-3">
-          <Link to="/about-this-project">
+          <Link to="/sobre-este-proyecto">
             <button className="rounded shadow px-2">
-              Switch to English <i class="bi bi-translate"></i>
+              Cambiar a español <i class="bi bi-translate"></i>
             </button>
           </Link>
         </div>
         <div className="container d-flex">
           <div className="card-bg-color-hero rounded p-3">
             <h1 className="fw-bold text-center display-4">
-              Sobre este proyecto
+              About this project
             </h1>
           </div>
         </div>
       </div>
-
       <div className="container">
         <div className="pt-5">
           <div className="bg-light px-5 py-3 rounded shadow mb-4">
             <h3 className="display-5 fw-bold mb-3">
-              <i className="bi bi-clock icon-color fs-1 me-2"></i>Duración
+              <i className="bi bi-clock icon-color fs-1 me-2"></i>Duration
             </h3>
             <p className="fs-5 text-muted mb-4">
-              Participamos de un{" "}
+              We participated in a{" "}
               <strong className="text-dark">
-                curso intensivo de catorce semanas
+                fourteen-week intensive course
               </strong>{" "}
-              que nos llevó a invertir más de{" "}
-              <strong className="text-dark">
-                600 horas de trabajo práctico
-              </strong>
-              , acompañadas de incontables litros de café ☕ y mate 🧉. Entre
-              líneas de código y desafíos constantes, el aprendizaje práctico
-              culminó en las últimas tres semanas con este proyecto final donde
-              transformamos ideas en soluciones reales e innovadoras.
+              that required us to invest over{" "}
+              <strong className="text-dark">600 hours of hands-on work</strong>,
+              fueled by countless cups of coffee ☕ and mate 🧉. Amid lines of
+              code and constant challenges, our practical learning culminated in
+              the last three weeks with this final project, where we transformed
+              ideas into real and innovative solutions.
             </p>
           </div>
           <div className="bg-light px-5 py-3 rounded shadow mb-4">
             <h3 className="display-5 fw-bold mb-4">
               <i className="bi bi-calendar-check icon-color fs-1 me-2"></i>
-              Planificación
+              Planning
             </h3>
             <p className="fs-5 text-muted mb-2">
-              Para la gestión del proyecto, nos apoyamos en{" "}
-              <strong className="text-dark">Notion</strong> como nuestra brújula
-              organizativa, estructurando las tareas en ciclos semanales y
-              clasificándolas en un tablero dinámico según su avance.{" "}
-              <strong className="text-dark">GitHub </strong>
-              fue nuestro aliado tecnológico, centralizando el trabajo del
-              equipo y asegurando una colaboración fluida y eficiente, como
-              engranajes perfectamente sincronizados ⚙️.
+              For project management, we relied on{" "}
+              <strong className="text-dark">Notion</strong> as our
+              organizational compass, structuring tasks into weekly cycles and
+              categorizing them in a dynamic board according to their progress.{" "}
+              <strong className="text-dark">GitHub</strong> was our
+              technological ally, centralizing the team's work and ensuring
+              seamless and efficient collaboration, like perfectly synchronized
+              gears ⚙️.
             </p>
+
             <div className="d-flex justify-content-center gap-5">
               <div>
                 <svg
@@ -104,23 +102,21 @@ function AboutUs() {
         <div className="bg-light px-5 py-3 rounded shadow mb-4">
           <div>
             <h3 className="display-5 fw-bold mb-3">
-              <i class="bi bi-code-square icon-color fs-1 me-2"></i>Tecnologías
+              <i class="bi bi-code-square icon-color fs-1 me-2"></i>Technologies
             </h3>
             <p className="fs-5 text-muted mb-5">
-              En nuestra aplicación, utilizamos un conjunto de tecnologías
-              modernas para ofrecer una experiencia fluida y de alta calidad.
-              Desde{" "}
+              In our application, we use a set of modern technologies to deliver
+              a seamless and high-quality experience. From{" "}
               <strong className="text-dark">
-                HTML5, CSS3, React y Bootstrap
+                HTML5, CSS3, React, and Bootstrap
               </strong>{" "}
-              que nos permiten crear interfaces interactivas, sólidas y
-              responsivas. En el backend, empleamos{" "}
-              <strong className="text-dark">Node.js y Express</strong> para
-              gestionar las solicitudes y la lógica del servidor, mientras que{" "}
-              <strong className="text-dark">MySQL</strong> nos ayuda a almacenar
-              datos de manera eficiente. Cada herramienta está seleccionada para
-              garantizar un rendimiento óptimo y una experiencia de usuario
-              excepcional 🚀.
+              that enable us to create interactive, robust, and responsive
+              interfaces. On the backend, we use{" "}
+              <strong className="text-dark">Node.js and Express</strong> to
+              handle server logic and requests, while{" "}
+              <strong className="text-dark">MySQL</strong> helps us store data
+              efficiently. Each tool is carefully selected to ensure optimal
+              performance and an exceptional user experience 🚀.
             </p>
             <div className="container my-4">
               <div className="icons-grid">
@@ -312,20 +308,21 @@ function AboutUs() {
         <div className="bg-light  rounded shadow mb-4">
           <div className="d-flex flex-column justify-content-center px-5 py-3 mb-3">
             <h3 className="display-5 fw-bold">
-              <i class="bi bi-laptop icon-color fs-1 me-2"></i>Almacenamiento y
+              <i className="bi bi-laptop icon-color fs-1 me-2"></i>Storage and
               Deployment
             </h3>
+
             <div>
               <p className="fs-5 text-muted mb-3">
-                Nuestra base de datos está en{" "}
-                <strong className="text-dark">Supabase</strong>, una plataforma
-                moderna y escalable que nos permite manejar grandes volúmenes de
-                datos de manera eficiente con MySQL. Nuestras aplicaciones están
-                deployadas en <strong className="text-dark">Vercel</strong>,
-                conocida por su excelente rendimiento y tiempos de carga ultra
-                rápidos, garantizando una experiencia de usuario fluida gracias
-                a su infraestructura global.⚡🌍
+                Our database is hosted on{" "}
+                <strong className="text-dark">Supabase</strong>, a modern and
+                scalable platform that allows us to efficiently handle large
+                volumes of data with MySQL. Our applications are deployed on{" "}
+                <strong className="text-dark">Vercel</strong>, renowned for its
+                excellent performance and ultra-fast loading times, ensuring a
+                smooth user experience thanks to its global infrastructure. ⚡🌍
               </p>
+
               <div className="d-flex justify-content-center text-center gap-5">
                 <div>
                   <svg
@@ -368,18 +365,17 @@ function AboutUs() {
         <div className="bg-light px-5 py-3 rounded shadow mb-4">
           <div className="pt-4">
             <h3 className="display-5 fw-bold">
-              <i className="bi bi-brush icon-color fs-1 me-2"></i>Diseño de la
-              aplicación
+              <i className="bi bi-brush icon-color fs-1 me-2"></i>Application
+              Design
             </h3>
 
             <p className="fs-5 text-muted mb-4">
-              Nuestro diseño de Front-End se inspira en los sitios web de
-              iGourmet 🧀 y Murray's Cheese 📸, adaptado a nuestra visión única.
-              Usamos las fotos de Murray's para enriquecer la estética visual y
-              creamos una paleta de colores cálidos para una identidad propia.
-              Además, elegimos el nombre iGourmet en homenaje a su logo y
-              adaptamos las fuentes de tipografía de la página para que combine
-              con él.
+              Our Front-End design is inspired by the websites of iGourmet 🧀
+              and Murray's Cheese 📸, adapted to our unique vision. We used
+              Murray's photos to enhance the visual aesthetics and created a
+              warm color palette for a distinct identity. Additionally, we chose
+              the name iGourmet in homage to their logo and adapted the
+              typography fonts of the page to match it.
             </p>
 
             <div className="row">
@@ -529,4 +525,4 @@ function AboutUs() {
   );
 }
 
-export default AboutUs;
+export default AboutUsEnglish;

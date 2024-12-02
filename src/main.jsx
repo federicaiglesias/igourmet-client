@@ -20,6 +20,7 @@ import UserProfile from "./components/user/UserProfile.jsx";
 import UserOrders from "./components/user/UserOrders.jsx";
 import UserData from "./components/user/UserData.jsx";
 import NotFound from "./components/NotFound.jsx";
+import AboutUsEnglish from "./components/AboutUsEnglish.jsx";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
         element: <AboutUs />,
       },
       {
+        path: "/about-this-project",
+        element: <AboutUsEnglish />,
+      },
+      {
         path: "/usuario",
         element: <UserProfile />,
       },
@@ -61,7 +66,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "*", 
+    path: "*",
     element: <NotFound />,
   },
   {
