@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
@@ -7,17 +7,23 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLocation } from "react-router-dom";
 import "./StyleAuth.css";
+import { useForm } from "react-hook-form";
 
 function Login() {
-  const [email, setEmail] = useState("cliente@igourmet.com");
-  const [password, setPassword] = useState("1234");
+  console.log("Renderizado");
 
+  const email = "cliente@igourmet.com";
+  const password = "1234";
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ defaultValues: { email, password } });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (data) => {
     try {
       const response = await axios({
         method: "POST",
@@ -51,20 +57,29 @@ function Login() {
                 Disfrutá de nuestros productos en la comodidad de tu casa.
               </p>
 
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-3">
                   <label hidden htmlFor="email">
                     Correo electrónico:
                   </label>
                   <input
                     type="text"
-                    required
+                    {...register("email", {
+                      required: true,
+                      pattern: /([\w\.]+)@([\w\.]+)\.(\w+)/gi,
+                    })}
                     id="email"
                     placeholder="Ingresá tu correo electrónico"
                     className="form-control w-100"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
                   />
+                  {errors.email?.type === "required" && (
+                    <p className="text-danger">
+                      Por favor, insertar correo electrónico.
+                    </p>
+                  )}
+                  {errors.email?.type === "pattern" && (
+                    <p className="text-danger">Formato incorrecto.</p>
+                  )}
                 </div>
 
                 <div className="mb-3">
@@ -73,14 +88,17 @@ function Login() {
                   </label>
                   <input
                     type="password"
-                    required
                     id="password"
                     name="password"
                     placeholder="Ingresá tu contraseña"
                     className="form-control w-100"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    {...register("password", { required: true })}
                   />
+                  {errors.password?.type === "required" && (
+                    <p className="text-danger">
+                      Por favor, insertar contraseña.
+                    </p>
+                  )}
                 </div>
 
                 <button className="w-100 mb-3 rounded">Ingresar</button>
