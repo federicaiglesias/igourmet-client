@@ -505,13 +505,10 @@ function AboutUsEnglish() {
                   <h5 className="text-center">Nicolás Romero</h5>
                   <p className="text-center">Full Stack Web Developer Jr.</p>
                   <div className="d-flex justify-content-center">
-                    <Link to="https://github.com/NicoRomero92" target="_blank">
+                    <Link to="https://github.com/" target="_blank">
                       <i className="bi bi-github me-2"></i>
                     </Link>
-                    <Link
-                      to="https://www.linkedin.com/in/nicolas-romero-garcía-1565a858/"
-                      target="_blank"
-                    >
+                    <Link to="https://www.linkedin.com/" target="_blank">
                       <i className="bi bi-linkedin"></i>
                     </Link>
                   </div>

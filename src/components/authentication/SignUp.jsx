@@ -3,8 +3,10 @@ import "./StyleAuth.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
+import { useForm } from "react-hook-form";
 
 function SignUp() {
+
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -14,12 +16,23 @@ function SignUp() {
   const [country, setCountry] = useState("");
   const [region, setRegion] = useState("");
   const [zipCode, setZipCode] = useState("");
+  const [countrySelector, setCountrySelector] = useState({
+    country,
+    region,
+  });
 
   const navigate = useNavigate();
 
-  const handleCreateUser = async (e) => {
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm({});
+
+  const handleCreateUser = async (data) => {
     try {
-      e.preventDefault();
       await axios({
         method: "POST",
         url: `${import.meta.env.VITE_API_URL}/users`,
@@ -50,35 +63,37 @@ function SignUp() {
           <div className="col-12 col-lg-5 corners bg-white py-4 d-flex flex-column  justify-content-center px-4 px-lg-5">
             <h2 className="">Registrate</h2>
             <p>Ingresá tus datos y disfrutá de Igourmet.</p>
-            <form onSubmit={handleCreateUser} className="w-100">
+            <form onSubmit={handleSubmit(handleCreateUser)} className="w-100">
               <div className="row">
                 <div className="col-md-6 mb-2">
                   <label hidden htmlFor="firstname">
                     Nombre
                   </label>
                   <input
-                    onChange={(e) => setFirstname(e.target.value)}
+                    {...register("firstname", { required: true })}
                     name="firstname"
-                    required
                     id="firstname"
                     placeholder="Nombre"
                     className="form-control p-1"
-                    value={firstname}
                   />
+                  {errors.firstname?.type === "required" && (
+                    <p className="text-danger">Por favor, insertar nombre.</p>
+                  )}
                 </div>
                 <div className="col-md-6 mb-2">
                   <label hidden htmlFor="lastname">
                     Apellido
                   </label>
                   <input
-                    onChange={(e) => setLastname(e.target.value)}
                     name="lastname"
-                    required
                     id="lastname"
                     placeholder="Apellido"
                     className="form-control p-1"
-                    value={lastname}
+                    {...register("lastname", { required: true })}
                   />
+                  {errors.lastname?.type === "required" && (
+                    <p className="text-danger">Por favor, insertar apellido.</p>
+                  )}
                 </div>
               </div>
               <div className="mb-2">
@@ -86,43 +101,56 @@ function SignUp() {
                   Correo electónico
                 </label>
                 <input
-                  onChange={(e) => setEmail(e.target.value)}
+                  {...register("email", {
+                    required: true,
+                    pattern: /([\w\.]+)@([\w\.]+)\.(\w+)/gi,
+                  })}
                   name="email"
-                  required
                   id="email"
                   placeholder="Correo electrónico"
                   className="form-control p-1 w-100"
-                  value={email}
                 />
+                {errors.email?.type === "required" && (
+                  <p className="text-danger">
+                    Por favor, insertar correo electrónico.
+                  </p>
+                )}
+                {errors.email?.type === "pattern" && (
+                  <p className="text-danger">Formato incorrecto.</p>
+                )}
               </div>
               <div className="mb-2">
                 <label hidden htmlFor="password">
                   Password:
                 </label>
                 <input
-                  onChange={(e) => setPassword(e.target.value)}
+                  {...register("password", { required: true })}
                   name="password"
-                  required
                   id="password"
                   type="password"
                   placeholder="Contraseña"
                   className="form-control p-1 w-100"
-                  value={password}
                 />
+                {errors.password?.type === "required" && (
+                  <p className="text-danger">Por favor, insertar contraseña.</p>
+                )}
               </div>
               <div className="mb-2">
                 <label hidden htmlFor="phoneNumber">
                   Número de teléfono:
                 </label>
                 <input
-                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  {...register("phoneNumber", { required: true })}
                   name="phoneNumber"
-                  required
                   id="phoneNumber"
                   placeholder="Número de teléfono"
                   className="form-control p-1 w-100"
-                  value={phoneNumber}
-                />
+                />{" "}
+                {errors.phoneNumber?.type === "required" && (
+                  <p className="text-danger">
+                    Por favor, insertar número de teléfono.
+                  </p>
+                )}
               </div>
 
               {/* Dirección */}
@@ -131,33 +159,57 @@ function SignUp() {
                   Dirección:
                 </label>
                 <input
-                  onChange={(e) => setAddress(e.target.value)}
+                  {...register("address", { required: true })}
                   name="address"
-                  required
                   id="address"
                   placeholder="Dirección"
                   className="form-control p-1 w-100"
-                  value={address}
                 />
+                {errors.address?.type === "required" && (
+                  <p className="text-danger">Por favor, insertar dirección.</p>
+                )}
               </div>
 
               <div className="row mb-2">
                 <div className="col-md-6 mb-2">
                   <CountryDropdown
-                    required
+                    defaultOptionLabel="Seleccionar país"
+                    name="country"
+                    control={control}
+                    value={countrySelector.country}
+                    onChange={(val) => {
+                      setCountrySelector({
+                        ...countrySelector,
+                        country: val,
+                      });
+                      setValue("country", val);
+                    }}
                     className="form-control rounded"
-                    value={country}
-                    onChange={(val) => setCountry(val)}
                   />
+
+                  {errors.country?.type === "required" && (
+                    <p className="text-danger">Por favor, insertar país.</p>
+                  )}
                 </div>
                 <div className="col-md-6">
                   <RegionDropdown
-                    required
-                    className="form-control rounded"
-                    country={country}
-                    value={region}
-                    onChange={(val) => setRegion(val)}
+                    name="region"
+                    control={control}
+                    country={countrySelector.country}
+                    value={countrySelector.region}
+                    defaultOptionLabel="Seleccionar región"
+                    onChange={(val) => {
+                      setCountrySelector({
+                        ...countrySelector,
+                        region: val,
+                      });
+                      setValue("region", val);
+                    }}
+                    className="form-control rounded "
                   />
+                  {errors.region?.type === "required" && (
+                    <p className="text-danger">Por favor, insertar región.</p>
+                  )}
                 </div>
               </div>
               <div className="mb-3">
@@ -166,13 +218,16 @@ function SignUp() {
                 </label>
                 <input
                   name="zipCode"
-                  required
                   id="zipCode"
                   placeholder="Código postal"
                   className="form-control p-1 w-100"
-                  value={zipCode}
-                  onChange={(e) => setZipCode(e.target.value)}
+                  {...register("zipCode", { required: true })}
                 />
+                {errors.zipCode?.type === "required" && (
+                  <p className="text-danger">
+                    Por favor, insertar código postal.
+                  </p>
+                )}
               </div>
 
               <button className="w-100 mb-2 border-0 p-1 rounded text-white">

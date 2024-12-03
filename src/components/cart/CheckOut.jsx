@@ -6,33 +6,25 @@ import axios from "axios";
 import OrderModal from "../user/OrderModal";
 import "./cart.css";
 import { emptyCart } from "../../redux/cartSlice";
+import { useForm } from "react-hook-form";
 
 function CheckOut() {
+  
+
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
-
-  const [contactInfo, setContactInfo] = useState({
-    firstname: "",
-    lastname: "",
-    phoneNumber: "",
-    email: "",
-  });
-
-  const [shippingInfo, setShippingInfo] = useState({
-    address: "",
-    zipCode: "",
-    country: "",
-    region: "",
-  });
 
   const [paymentInfo, setPaymentInfo] = useState({
     cardNumber: "",
     expiryDate: "",
     cvv: "",
   });
-
+  const [countrySelector, setCountrySelector] = useState({
+    country: "Uruguay",
+    region: "Maldonado",
+  });
   const [isProcessing, setIsProcessing] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
 
@@ -41,25 +33,43 @@ function CheckOut() {
   const total = subtotal + shippingCost;
 
   useEffect(() => {
-    if (!user.token) {
-      navigate("/login");
-    }
-    setContactInfo({
-      firstname: user.firstname,
-      lastname: user.lastname,
-      phoneNumber: user.phoneNumber,
-      email: user.email,
-    });
-    setShippingInfo({
-      address: user.address,
-      zipCode: user.zipCode,
-      country: user.country,
-      region: user.region,
-    });
+    if (!user.token) return navigate("/login");
   }, [user]);
+  const contactInfo = {
+    firstname: user.firstname,
+    lastname: user.lastname,
+    phoneNumber: user.phoneNumber,
+    email: user.email,
+  };
+  const shippingInfo = {
+    address: user.address,
+    zipCode: user.zipCode,
+    country: user.country,
+    region: user.region,
+  };
+  const { firstname, lastname, phoneNumber, email } = contactInfo;
+  const { address, zipCode, country, region } = shippingInfo;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      firstname,
+      lastname,
+      phoneNumber,
+      email,
+      address,
+      zipCode,
+      country,
+      region,
+    },
+  });
+
+  const onSubmit = async (data) => {
     setIsProcessing(true);
     setIsConfirmed(false);
 
@@ -100,7 +110,7 @@ function CheckOut() {
               <h1 className=" fs-md-4 orders-title">Resumen de compra</h1>
             </div>
           </div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="line-border px-4 py-4">
               <h4 className="fs-6 fs-md-5 text-color">
                 Información de contacto
@@ -109,59 +119,59 @@ function CheckOut() {
                 <div className="col-md-6">
                   <input
                     type="text"
-                    required
                     className="form-control mb-3 rounded checkout-input text-color"
                     placeholder="Nombre"
-                    value={contactInfo.firstname}
-                    onChange={(e) =>
-                      setContactInfo({
-                        ...contactInfo,
-                        firstname: e.target.value,
-                      })
-                    }
+                    {...register("firstname", { required: true })}
                   />
+                  {errors.firstname?.type === "required" && (
+                    <p className="text-danger">Por favor, insertar nombre.</p>
+                  )}
                 </div>
                 <div className="col-md-6">
                   <input
                     type="text"
-                    required
                     className="form-control mb-3 checkout-input rounded text-color"
                     placeholder="Apellido"
-                    value={contactInfo.lastname}
-                    onChange={(e) =>
-                      setContactInfo({
-                        ...contactInfo,
-                        lastname: e.target.value,
-                      })
-                    }
+                    {...register("lastname", { required: true })}
                   />
+                  {errors.lastname?.type === "required" && (
+                    <p className="text-danger">Por favor, insertar apellido.</p>
+                  )}
                 </div>
                 <div className="col-md-6">
                   <input
                     type="text"
-                    required
                     className="form-control mb-3 checkout-input rounded text-color"
                     placeholder="Número de teléfono"
-                    value={contactInfo.phoneNumber}
-                    onChange={(e) =>
-                      setContactInfo({
-                        ...contactInfo,
-                        phoneNumber: e.target.value,
-                      })
-                    }
+                    {...register("phoneNumber", { required: true })}
                   />
+                  {errors.phoneNumber?.type === "required" && (
+                    <p className="text-danger">
+                      Por favor, insertar número de teléfono.
+                    </p>
+                  )}
+                  {errors.phoneNumber?.type === "pattern" && (
+                    <p className="text-danger">Formato incorrecto.</p>
+                  )}
                 </div>
                 <div className="col-md-6">
                   <input
                     type="email"
-                    required
-                    className="form-control checkout-input rounded text-color"
+                    className="form-control mb-3 checkout-input rounded text-color"
                     placeholder="Correo electrónico"
-                    value={contactInfo.email}
-                    onChange={(e) =>
-                      setContactInfo({ ...contactInfo, email: e.target.value })
-                    }
+                    {...register("email", {
+                      required: true,
+                      pattern: /([\w\.]+)@([\w\.]+)\.(\w+)/gi,
+                    })}
                   />
+                  {errors.email?.type === "required" && (
+                    <p className="text-danger">
+                      Por favor, insertar correo electrónico.
+                    </p>
+                  )}
+                  {errors.email?.type === "pattern" && (
+                    <p className="text-danger">Formato incorrecto.</p>
+                  )}
                 </div>
               </div>
             </div>
@@ -173,55 +183,68 @@ function CheckOut() {
                 <div className="col-md-6">
                   <input
                     type="text"
-                    required
                     className="form-control mb-3 checkout-input rounded text-color"
                     placeholder="Dirección"
-                    value={shippingInfo.address}
-                    onChange={(e) =>
-                      setShippingInfo({
-                        ...shippingInfo,
-                        address: e.target.value,
-                      })
-                    }
+                    {...register("address", { required: true })}
                   />
+                  {errors.address?.type === "required" && (
+                    <p className="text-danger">
+                      Por favor, insertar dirección.
+                    </p>
+                  )}
                 </div>
                 <div className="col-md-6">
                   <input
                     type="text"
-                    required
                     className="form-control mb-3 checkout-input rounded text-color"
                     placeholder="Código postal"
-                    value={shippingInfo.zipCode}
-                    onChange={(e) =>
-                      setShippingInfo({
-                        ...shippingInfo,
-                        zipCode: e.target.value,
-                      })
-                    }
+                    {...register("zipCode", { required: true })}
                   />
+                  {errors.zipCode?.type === "required" && (
+                    <p className="text-danger">
+                      Por favor, insertar código postal.
+                    </p>
+                  )}
                 </div>
                 <div className="col-md-6">
                   <CountryDropdown
-                    required
                     defaultOptionLabel="Seleccionar país"
-                    value={shippingInfo.country}
-                    onChange={(val) =>
-                      setShippingInfo({ ...shippingInfo, country: val })
-                    }
+                    name="country"
+                    control={control}
+                    value={countrySelector.country}
+                    onChange={(val) => {
+                      setCountrySelector({
+                        ...countrySelector,
+                        country: val,
+                      });
+                      setValue("country", val);
+                    }}
                     className="form-control mb-3 checkout-input rounded text-color"
                   />
+
+                  {errors.country?.type === "required" && (
+                    <p className="text-danger">Por favor, insertar país.</p>
+                  )}
                 </div>
                 <div className="col-md-6">
                   <RegionDropdown
-                    required
-                    country={shippingInfo.country}
-                    value={shippingInfo.region}
+                    name="region"
+                    control={control}
+                    country={countrySelector.country}
+                    value={countrySelector.region}
                     defaultOptionLabel="Seleccionar región"
-                    onChange={(val) =>
-                      setShippingInfo({ ...shippingInfo, region: val })
-                    }
-                    className="form-control checkout-input rounded text-color"
+                    onChange={(val) => {
+                      setCountrySelector({
+                        ...countrySelector,
+                        region: val,
+                      });
+                      setValue("region", val);
+                    }}
+                    className="form-control mb-3 checkout-input rounded text-color"
                   />
+                  {errors.region?.type === "required" && (
+                    <p className="text-danger">Por favor, insertar región.</p>
+                  )}
                 </div>
               </div>
             </div>
@@ -233,44 +256,42 @@ function CheckOut() {
                 <div className="col-md-6">
                   <input
                     type="text"
-                    required
                     className="form-control mb-3 checkout-input rounded text-color"
                     placeholder="Número de tarjeta"
-                    value={paymentInfo.cardNumber}
-                    onChange={(e) =>
-                      setPaymentInfo({
-                        ...paymentInfo,
-                        cardNumber: e.target.value,
-                      })
-                    }
+                    defaultValue={setPaymentInfo.cardNumber}
+                    {...register("cardNumber", { required: true })}
                   />
+                  {errors.cardNumber?.type === "required" && (
+                    <p className="text-danger">
+                      Por favor, insertar número de tarjeta.
+                    </p>
+                  )}
                 </div>
                 <div className="col-md-6">
                   <input
                     type="text"
-                    required
                     className="form-control mb-3 checkout-input rounded text-color"
                     placeholder="Fecha de expiración (MM/AA)"
-                    value={paymentInfo.expiryDate}
-                    onChange={(e) =>
-                      setPaymentInfo({
-                        ...paymentInfo,
-                        expiryDate: e.target.value,
-                      })
-                    }
+                    defaultValue={setPaymentInfo.expiryDate}
+                    {...register("expDate", { required: true })}
                   />
+                  {errors.expDate?.type === "required" && (
+                    <p className="text-danger">
+                      Por favor, insertar fecha de expiración.
+                    </p>
+                  )}
                 </div>
                 <div className="col-md-6">
                   <input
                     type="text"
-                    required
-                    className="form-control checkout-input rounded text-color"
+                    className="form-control mb-3 checkout-input rounded text-color"
                     placeholder="cvv"
-                    value={paymentInfo.cvv}
-                    onChange={(e) =>
-                      setPaymentInfo({ ...paymentInfo, cvv: e.target.value })
-                    }
+                    defaultValue={setPaymentInfo.cvv}
+                    {...register("cvv", { required: true })}
                   />
+                  {errors.cvv?.type === "required" && (
+                    <p className="text-danger">Por favor, insertar cvv.</p>
+                  )}
                 </div>
               </div>
             </div>
