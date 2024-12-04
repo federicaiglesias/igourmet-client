@@ -65,3 +65,6 @@
 .empty-order {
   min-height: 68vh;
 }
+.error-color {
+  color: #ffdbd3;
+}

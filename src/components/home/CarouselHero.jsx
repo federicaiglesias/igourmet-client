@@ -31,7 +31,7 @@ function CarouselHero() {
           <Carousel.Caption className="centered-caption-two rounded">
             <h2>Sabor intenso para noches frías</h2>
             <p>Probá nuestro Vacherin Fribourgeois añejado en cueva.</p>
-            <Link to="/comprar">
+            <Link to="/comprar/vcherin-fribourgeoisnjmpcwapxoqtilch5pyl">
               <button className="btn-now"> Comprá ahora </button>
             </Link>
           </Carousel.Caption>

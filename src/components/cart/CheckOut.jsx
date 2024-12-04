@@ -9,8 +9,6 @@ import { emptyCart } from "../../redux/cartSlice";
 import { useForm } from "react-hook-form";
 
 function CheckOut() {
-  
-
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
@@ -124,7 +122,7 @@ function CheckOut() {
                     {...register("firstname", { required: true })}
                   />
                   {errors.firstname?.type === "required" && (
-                    <p className="text-danger">Por favor, insertar nombre.</p>
+                    <p className="error-color">Por favor, insertar nombre.</p>
                   )}
                 </div>
                 <div className="col-md-6">
@@ -135,7 +133,7 @@ function CheckOut() {
                     {...register("lastname", { required: true })}
                   />
                   {errors.lastname?.type === "required" && (
-                    <p className="text-danger">Por favor, insertar apellido.</p>
+                    <p className="error-color">Por favor, insertar apellido.</p>
                   )}
                 </div>
                 <div className="col-md-6">
@@ -146,12 +144,12 @@ function CheckOut() {
                     {...register("phoneNumber", { required: true })}
                   />
                   {errors.phoneNumber?.type === "required" && (
-                    <p className="text-danger">
+                    <p className="error-color">
                       Por favor, insertar número de teléfono.
                     </p>
                   )}
                   {errors.phoneNumber?.type === "pattern" && (
-                    <p className="text-danger">Formato incorrecto.</p>
+                    <p className="error-color">Formato incorrecto.</p>
                   )}
                 </div>
                 <div className="col-md-6">
@@ -165,12 +163,12 @@ function CheckOut() {
                     })}
                   />
                   {errors.email?.type === "required" && (
-                    <p className="text-danger">
+                    <p className="error-color">
                       Por favor, insertar correo electrónico.
                     </p>
                   )}
                   {errors.email?.type === "pattern" && (
-                    <p className="text-danger">Formato incorrecto.</p>
+                    <p className="error-color">Formato incorrecto.</p>
                   )}
                 </div>
               </div>
@@ -188,7 +186,7 @@ function CheckOut() {
                     {...register("address", { required: true })}
                   />
                   {errors.address?.type === "required" && (
-                    <p className="text-danger">
+                    <p className="error-color">
                       Por favor, insertar dirección.
                     </p>
                   )}
@@ -201,7 +199,7 @@ function CheckOut() {
                     {...register("zipCode", { required: true })}
                   />
                   {errors.zipCode?.type === "required" && (
-                    <p className="text-danger">
+                    <p className="error-color">
                       Por favor, insertar código postal.
                     </p>
                   )}
@@ -223,7 +221,7 @@ function CheckOut() {
                   />
 
                   {errors.country?.type === "required" && (
-                    <p className="text-danger">Por favor, insertar país.</p>
+                    <p className="error-color">Por favor, insertar país.</p>
                   )}
                 </div>
                 <div className="col-md-6">
@@ -243,7 +241,7 @@ function CheckOut() {
                     className="form-control mb-3 checkout-input rounded text-color"
                   />
                   {errors.region?.type === "required" && (
-                    <p className="text-danger">Por favor, insertar región.</p>
+                    <p className="error-color">Por favor, insertar región.</p>
                   )}
                 </div>
               </div>
@@ -258,12 +256,25 @@ function CheckOut() {
                     type="text"
                     className="form-control mb-3 checkout-input rounded text-color"
                     placeholder="Número de tarjeta"
-                    defaultValue={setPaymentInfo.cardNumber}
-                    {...register("cardNumber", { required: true })}
+                    {...register("cardNumber", {
+                      required: true,
+                      minLength: 13,
+                      maxLength: 18,
+                    })}
                   />
                   {errors.cardNumber?.type === "required" && (
-                    <p className="text-danger">
+                    <p className="error-color">
                       Por favor, insertar número de tarjeta.
+                    </p>
+                  )}
+                  {errors.cardNumber?.type === "minLength" && (
+                    <p className="error-color">
+                      El número de tarjeta debe tener al menos 13 caracteres.
+                    </p>
+                  )}
+                  {errors.cardNumber?.type === "maxLength" && (
+                    <p className="error-color">
+                      El número de tarjeta no puede tener más de 18 caracteres.
                     </p>
                   )}
                 </div>
@@ -272,13 +283,18 @@ function CheckOut() {
                     type="text"
                     className="form-control mb-3 checkout-input rounded text-color"
                     placeholder="Fecha de expiración (MM/AA)"
-                    defaultValue={setPaymentInfo.expiryDate}
-                    {...register("expDate", { required: true })}
+                    {...register("expDate", {
+                      required: true,
+                      pattern: /^(0[1-9]|1[0-2])\/\d{2}$/,
+                    })}
                   />
                   {errors.expDate?.type === "required" && (
-                    <p className="text-danger">
+                    <p className="error-color">
                       Por favor, insertar fecha de expiración.
                     </p>
+                  )}
+                  {errors.expDate?.type === "pattern" && (
+                    <p className="error-color">Formato incorrecto.</p>
                   )}
                 </div>
                 <div className="col-md-6">
@@ -286,11 +302,24 @@ function CheckOut() {
                     type="text"
                     className="form-control mb-3 checkout-input rounded text-color"
                     placeholder="cvv"
-                    defaultValue={setPaymentInfo.cvv}
-                    {...register("cvv", { required: true })}
+                    {...register("cvv", {
+                      required: true,
+                      minLength: 3,
+                      maxLength: 3,
+                    })}
                   />
                   {errors.cvv?.type === "required" && (
-                    <p className="text-danger">Por favor, insertar cvv.</p>
+                    <p className="error-color">Por favor, insertar cvv.</p>
+                  )}
+                  {errors.cvv?.type === "minLength" && (
+                    <p className="error-color">
+                      El cvv debe tener al menos 3 caracteres.
+                    </p>
+                  )}
+                  {errors.cvv?.type === "maxLength" && (
+                    <p className="error-color">
+                      El cvv no puede tener más de 3 caracteres.
+                    </p>
                   )}
                 </div>
               </div>
