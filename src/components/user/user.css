@@ -1,10 +1,10 @@
 .data-card {
-  background: rgba(0, 0, 0, 0.350);
+  background: rgba(0, 0, 0, 0.35);
   border-radius: 16px;
   backdrop-filter: blur(7px);
   -webkit-backdrop-filter: blur(7px);
 }
-.data-card-input{
+.data-card-input {
   background: rgba(0, 0, 0, 0.002);
   border-radius: 16px;
   backdrop-filter: blur(3px);
@@ -35,9 +35,9 @@
 
 .profile-bg {
   background-image: url("/fondoprofilelight.jpg");
-  background-size: cover; 
-  background-repeat: no-repeat; 
-  background-position: center; 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .animation-center {
   display: block;
@@ -52,7 +52,7 @@
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Sombra para mejorar la legibilidad */
   display: inline-block; /* Ajusta el tamaño al contenido */
 }
-.text-color{
+.text-color {
   color: #fcf7f7;
 }
 .text-color-units {
@@ -60,11 +60,12 @@
 }
 
 .line-border {
-  border-bottom: 1px solid #fcfcfc46 ;
+  border-bottom: 1px solid #fcfcfc46;
 }
 .empty-order {
   min-height: 68vh;
 }
 .error-color {
   color: #ffdbd3;
+  font-size: 0.8rem;
 }

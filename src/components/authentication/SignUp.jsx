@@ -77,7 +77,7 @@ function SignUp() {
                     className="form-control p-1"
                   />
                   {errors.firstname?.type === "required" && (
-                    <p className="text-danger">Por favor, insertar nombre.</p>
+                    <p className="text-danger font-size-error">Por favor, insertar nombre.</p>
                   )}
                 </div>
                 <div className="col-md-6 mb-2">
@@ -92,7 +92,7 @@ function SignUp() {
                     {...register("lastname", { required: true })}
                   />
                   {errors.lastname?.type === "required" && (
-                    <p className="text-danger">Por favor, insertar apellido.</p>
+                    <p className="text-danger font-size-error">Por favor, insertar apellido.</p>
                   )}
                 </div>
               </div>
@@ -111,12 +111,12 @@ function SignUp() {
                   className="form-control p-1 w-100"
                 />
                 {errors.email?.type === "required" && (
-                  <p className="text-danger">
+                  <p className="text-danger font-size-error">
                     Por favor, insertar correo electrónico.
                   </p>
                 )}
                 {errors.email?.type === "pattern" && (
-                  <p className="text-danger">Formato incorrecto.</p>
+                  <p className="text-danger font-size-error">Formato incorrecto.</p>
                 )}
               </div>
               <div className="mb-2">
@@ -132,7 +132,7 @@ function SignUp() {
                   className="form-control p-1 w-100"
                 />
                 {errors.password?.type === "required" && (
-                  <p className="text-danger">Por favor, insertar contraseña.</p>
+                  <p className="text-danger font-size-error">Por favor, insertar contraseña.</p>
                 )}
               </div>
               <div className="mb-2">
@@ -147,7 +147,7 @@ function SignUp() {
                   className="form-control p-1 w-100"
                 />{" "}
                 {errors.phoneNumber?.type === "required" && (
-                  <p className="text-danger">
+                  <p className="text-danger font-size-error">
                     Por favor, insertar número de teléfono.
                   </p>
                 )}
@@ -166,7 +166,7 @@ function SignUp() {
                   className="form-control p-1 w-100"
                 />
                 {errors.address?.type === "required" && (
-                  <p className="text-danger">Por favor, insertar dirección.</p>
+                  <p className="text-danger font-size-error">Por favor, insertar dirección.</p>
                 )}
               </div>
 
@@ -188,7 +188,7 @@ function SignUp() {
                   />
 
                   {errors.country?.type === "required" && (
-                    <p className="text-danger">Por favor, insertar país.</p>
+                    <p className="text-danger font-size-error">Por favor, insertar país.</p>
                   )}
                 </div>
                 <div className="col-md-6">
@@ -208,7 +208,7 @@ function SignUp() {
                     className="form-control rounded "
                   />
                   {errors.region?.type === "required" && (
-                    <p className="text-danger">Por favor, insertar región.</p>
+                    <p className="text-danger font-size-error">Por favor, insertar región.</p>
                   )}
                 </div>
               </div>
@@ -224,7 +224,7 @@ function SignUp() {
                   {...register("zipCode", { required: true })}
                 />
                 {errors.zipCode?.type === "required" && (
-                  <p className="text-danger">
+                  <p className="text-danger font-size-error">
                     Por favor, insertar código postal.
                   </p>
                 )}
